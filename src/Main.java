@@ -6,11 +6,9 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Main {
     private static List<Integer> prices;
-    
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -18,31 +16,30 @@ public class Main {
         prices = new ArrayList<>();
 
         String line;
-        do{
+        do {
             line = br.readLine();
             line = br.readLine();
             String[] parts = line.split(" ");
-            for(int i = 0 ; i < parts.length ; i++){
+            for (int i = 0; i < parts.length; i++) {
                 prices.add(Integer.parseInt(parts[i]));
             }
             line = br.readLine();
             int amount = Integer.parseInt(line);
 
-            
-           String out = printResult(result(amount, prices));
+            String out = printResult(result(amount, prices));
 
             bw.write(out);
 
             line = br.readLine();
-        }while(line != null);
+        } while (line != null);
         br.close();
         bw.close();
     }
 
-    public static String printResult(String ms) throws IOException{
-        
+    public static String printResult(String ms) throws IOException {
+
         return ms = ("Peter should buy books whose prices are " + ms + "\n\n");
-    
+
     }
 
     public static String result(int amount, List<Integer> values) {
