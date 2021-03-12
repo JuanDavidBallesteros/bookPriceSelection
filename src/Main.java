@@ -47,32 +47,32 @@ public class Main {
 
     public static String result (int amount, List<Integer> values){
         String ms = "no values";
+        int subtract = 1000001;
 
         for (int i = 0; i < values.size() ; i++){
 
             int testValue = values.get(i);
-            int subtract = 1000001;
             
-
             for(int j = i+1; j < values.size(); j++){
-                if(testValue + values.get(j) == amount && testValue < j){
 
-                    if(values.get(j) - testValue <= subtract){
-                        ms = testValue + " , " + values.get(j);
-                        subtract = values.get(j) - testValue;
+                if(testValue + values.get(j) == amount){
+
+                    int temp =  testValue - values.get(j);
+
+                    if( temp >= 0 && temp < subtract ){ 
+                        
+                        ms = values.get(j) + " , " + testValue;
+                        subtract = temp;
                         System.out.println(subtract + " = " + values.get(j) + " - " + testValue);
-                    }   
-                }
-                
-                if(testValue + values.get(j) == amount && testValue >= j){
-                    
-                    if(testValue - values.get(j) <= subtract){
-                        ms = values.get(j) + " , " + testValue ;
-                        subtract =  testValue - values.get(j);
+
+                    } else if( temp  < 0 &&  temp*-1  < subtract ){
+
+                        ms =  testValue + " , " + values.get(j) ;
+                        subtract =  temp*-1;
                         System.out.println(subtract + " = " + testValue+ " - " + values.get(j));
-                    }   
+                    }
                 }
-            }
+            } 
         }
             
         return ms;
