@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Main {
-    private static List<Integer> prices;
-
+class Main {
+    
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -17,35 +16,45 @@ public class Main {
         prices = new ArrayList<>();
 
         String line;
+        boolean exit = false;
+        line = br.readLine(); 
+        
         do {
+              
             line = br.readLine();
-            line = br.readLine();
+            
             String[] parts = line.split(" ");
             for (int i = 0; i < parts.length; i++) {
                 prices.add(Integer.parseInt(parts[i]));
             }
+
             line = br.readLine();
             int amount = Integer.parseInt(line);
-
+            Collections.sort(prices);
+          
             String out = printResult(binarySearch(amount, prices));
 
             bw.write(out);
+          
+            
+            prices.clear();
 
             line = br.readLine();
-        } while (line != null);
+            if(line.equals("")){
+                line = br.readLine();
+                if (line == null){
+                    exit = true;  
+                }              
+            } 
+        
+        } while (!exit);
+        //bw.write("\n");
         br.close();
         bw.close();
     }
+    static List<Integer> prices;
 
-    public static String printResult(String ms) throws IOException {
-
-        return ms = ("Peter should buy books whose prices are " + ms + "\n\n");
-
-    }
-
-    public static String binarySearch(int amount, List<Integer> values) {
-
-        Collections.sort(values);
+    static String binarySearch(int amount, List<Integer> values) {
 
         String out = "";
         int subtract = 1000001;
@@ -89,36 +98,40 @@ public class Main {
         return out;
     }
 
-    public static String result(int amount, List<Integer> values) {
-        String ms = "no values";
-        int subtract = 1000001;
+    static String printResult(String ms) throws IOException {
 
-        for (int i = 0; i < values.size(); i++) {
+        return ms = ("Peter should buy books whose prices are " + ms + "." + "\n\n");
 
-            int testValue = values.get(i);
+    }
+}
 
-            for (int j = i + 1; j < values.size(); j++) {
 
-                if (testValue + values.get(j) == amount) {
+/* static String result(int amount, List<Integer> values) {
+    String ms = "no values";
+    int subtract = 1000001;
 
-                    int temp = testValue - values.get(j);
+    for (int i = 0; i < values.size(); i++) {
 
-                    if (temp >= 0 && temp < subtract) {
+        int testValue = values.get(i);
 
-                        ms = values.get(j) + " and " + testValue;
-                        subtract = temp;
+        for (int j = i + 1; j < values.size(); j++) {
 
-                    } else if (temp < 0 && temp * -1 < subtract) {
+            if (testValue + values.get(j) == amount) {
 
-                        ms = testValue + " and " + values.get(j);
-                        subtract = temp * -1;
-                    }
+                int temp = testValue - values.get(j);
+
+                if (temp >= 0 && temp < subtract) {
+
+                    ms = values.get(j) + " and " + testValue;
+                    subtract = temp;
+
+                } else if (temp < 0 && temp * -1 < subtract) {
+
+                    ms = testValue + " and " + values.get(j);
+                    subtract = temp * -1;
                 }
             }
         }
-
-        return ms;
-
     }
-
-}
+    return ms;
+} */
